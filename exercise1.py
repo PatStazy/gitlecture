@@ -65,6 +65,14 @@ graph = axs.plot.bar(stacked=True)
 graph.set_ylim([0,70000000])
 graph
 
+#Creating a pie chart showing % of vote given to Democrats, Republicans, Democrat Aligned, and Republican Aligned
+
+Pie_info = pd.DataFrame({"Party": ["Republican Voting %", "Democrat Voting %", "Republican Aligned Voting %",
+                                  "Democrat Aligned Voting %"], "% Of Total Vote": [Total_REP / Total_Voting_Pop,
+                                    Total_DEM / Total_Voting_Pop, Third_party_align_REP / Total_Voting_Pop,
+                                    Third_party_align_DEM / Total_Voting_Pop]})
+Pie_chart = Pie_info.groupby(["Party"]).sum().plot(kind="pie", y="% Of Total Vote", figsize=(8, 10))
+
 
 
 
