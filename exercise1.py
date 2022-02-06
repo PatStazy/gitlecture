@@ -8,8 +8,8 @@ print(df)
 
 #Drops unnecessary columns from data set
 
-df = df.drop(columns=["state_po", "state_fips", "state_cen", "state_ic", "writein", "version", "notes", "office", "candidate",
-                "party_detailed"])
+df = df.drop(columns=["state_po", "state_fips", "state_cen", "state_ic", "writein", "version", "notes", "office",
+                "party_simplified", "candidate"])
 print(df)
 
 #Drops unnecessary rows from data set
@@ -17,13 +17,18 @@ print(df)
 df_2016 = df[df["year"]==2016]
 print(df_2016)
 
+#Dropping all NaN values within data
+
+df_2016 = df_2016.dropna()
+df_2016
+
 #Sum_X_3 refers to the summary statistics of all three independent variables: Libertarian + Other, Republican, and
 #Democrate voter data per state
 #year not included as year data (Sum_X_3) = year data (df_2016)
 #totalvotes not included as totalvotes data (Sum_X_3) = totalvotes data (df_2016)
 
-Sum_X_3 = df_2016[["candidatevotes","party_simplified"]].groupby(["party_simplified"]).sum()
-# Sum_X_3 = df_2016[["state","candidatevotes","party_simplified", "totalvotes"]].groupby(["state","party_simplified"]).sum()
+#Sum_X_4 = df_2016[["candidatevotes","party_simplified"]].groupby(["party_simplified"]).sum()
+Sum_X_3 = df_2016[["state","candidatevotes", "party_detailed", "totalvotes"]].groupby(["state","party_detailed"]).sum()
 Sum_X_3
 
 #Adding the sum of total candidate votes for LIBERTARIAN and OTHER
